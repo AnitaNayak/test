@@ -1,0 +1,64 @@
+language: python
+
+dist: xenial
+
+python:
+  - "3.5"
+
+# ------------------------------------------------------------------------------
+# Caching: https://docs.travis-ci.com/user/caching/
+# Looks like apt packages will be slow to download is cached! so let's not 
+# cache those.
+# ------------------------------------------------------------------------------
+cache: pip
+  
+branches:
+  only:
+    - master
+
+# ------------------------------------------------------------------------------
+# Install Linux dependencies. 
+# -qq option if for less output. 
+# On ubuntu Trusty (14.04), libgsl-dev and dbg not available!!! use libgsl0-dev libgsl0-dbg instead
+# ------------------------------------------------------------------------------
+before_install:
+  - sudo add-apt-repository universe
+  - sudo add-apt-repository restricted
+  - sudo add-apt-repository multiverse
+  - sudo apt-get -qq update
+  - sudo apt-get install -y vim git 
+  - sudo apt-get install -y libboost-all-dev byacc libyaml-cpp-dev
+  - sudo apt-get install -y g++ flex bison
+  - sudo apt-get install -y libblas-dev liblapack-dev
+  - sudo apt-get install -y libgsl0-dev libgsl0-dbg
+  - sudo apt-get install -y libpng-dev libfreetype6-dev pkg-config 
+  
+
+# Python 3.5 should be available , install it if it isn't! (commented out)
+# sudo apt-get install -y python3-pip python3-dev python3-setuptools
+
+# ------------------------------------------------------------------------------
+# Install Python dependencies
+# ------------------------------------------------------------------------------
+install: 
+  - "pip install -r requirements.txt"
+  
+  
+# ------------------------------------------------------------------------------  
+# Command to run tests
+# ------------------------------------------------------------------------------
+script: 
+ - echo "current working dir is:" 
+ - pwd
+ - python run.py
+# - python test/run_tests.py
+ 
+
+notifications:
+  emai
+l: true
+      
+  #slack:
+    #on_failure: always
+  
+

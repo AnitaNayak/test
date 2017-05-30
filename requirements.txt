@@ -1,0 +1,10 @@
+IBMQuantumExperience
+requests
+numpy
+networkx 
+matplotlib 
+jupyter 
+pyyaml 
+ply
+nose_parameterized
+coverage
