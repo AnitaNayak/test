@@ -32,7 +32,7 @@ class MyTest(unittest.TestCase):
         print("Running test_this_should_pass...")
         self.assertTrue(self.val == 10)
     
-    @unittest.skip("Skipping a known failure .. test_this_should_fail")
+    #@unittest.skip("Skipping a known failure .. test_this_should_fail")
     def test_this_should_fail(self):
         print("Running test_this_should_fail...")
         self.assertFalse(self.val == 10)
